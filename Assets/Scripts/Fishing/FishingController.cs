@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class FishingController : MonoBehaviour
 {
+    public LineCast lineCast;
+    
     public int minFishingDistance;            // Min distance (7ish)
     public int maxFishingDistance;            // Max distance (28ish) 
     public bool wasInterrupted;                // Interrupted flag (moved, mob attacked, etc); public for outside access
@@ -35,6 +37,8 @@ public class FishingController : MonoBehaviour
 
     private void Awake()
     {
+        lineCast = gameObject.GetComponent<LineCast>();
+
         wasInterrupted = false;
         scriptTarget = null;
         lineOut = false;
@@ -87,14 +91,26 @@ public class FishingController : MonoBehaviour
         }
     }
 
-    private void OnCast() //right click currently
+
+
+
+    private void OnCast(InputValue value) //right click currently
     {
-        if(lineOut == false) 
+        float val = value.Get<float>();
+        if(val == 1)
         {
-            Debug.Log("start fishing");
-            ActionListener();
+            lineCast.lineVisual.enabled = true;
+            if(lineOut == false) 
+            {
+                Debug.Log("start fishing");
+                ActionListener();
+            }
         }
+        
     }
+
+
+
 
     private void OnMousePos(InputValue value)
     {

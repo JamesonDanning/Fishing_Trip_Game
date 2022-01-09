@@ -14,20 +14,28 @@ public class LineCast : MonoBehaviour
     public int lineSegment = 10;
     public float flightTime;
     private Camera cam;
+
+    public bool casting = false;
  
     // Start is called before the first frame update
     void Start()
     {
         fc = gameObject.GetComponent<FishingController>();
         cam = Camera.main;
+        
         lineVisual.positionCount = lineSegment + 1;
+        lineVisual.enabled = false;
 
     }
  
     // Update is called once per frame
     void Update()
     {
-        LaunchProjectile();
+        if(casting)
+        {
+            LaunchProjectile();
+        }
+        
     }
  
     void LaunchProjectile()
