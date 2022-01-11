@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class FishingController : MonoBehaviour
 {
+    private PlayerInputActions playerInput;
     public LineCast lineCast;
     
     public int minFishingDistance;            // Min distance (7ish)
@@ -31,12 +32,10 @@ public class FishingController : MonoBehaviour
     
 
 
-    //input actions
-    public InputAction action;
-
 
     private void Awake()
     {
+        playerInput = new PlayerInputActions();
         lineCast = gameObject.GetComponent<LineCast>();
 
         wasInterrupted = false;
@@ -53,9 +52,25 @@ public class FishingController : MonoBehaviour
 
         if (minFishingDistance < 0)
             minFishingDistance = 7;
+    }
 
-        
-        
+   
+
+    private void Start() 
+    {      
+        playerInput.Player.Cast.started += ctx => CastStart(ctx);
+        playerInput.Player.Cast.canceled += ctx => CastRelease(ctx);///
+    }
+
+
+    private void OnEnable() 
+    {
+        playerInput.Enable();
+    }
+
+    private void OnDisable() 
+    {
+        playerInput.Disable();
     }
 
 
@@ -94,23 +109,33 @@ public class FishingController : MonoBehaviour
 
 
 
-    private void OnCast(InputValue value) //right click currently
-    {
-        float val = value.Get<float>();
-        if(val == 1)
-        {
+    private void CastStart(InputAction.CallbackContext context) //right click currently
+    { 
+        Debug.Log("cast start");
+            if(lineOut) return;
+
             lineCast.lineVisual.enabled = true;
-            if(lineOut == false) 
-            {
-                Debug.Log("start fishing");
-                ActionListener();
-            }
-        }
+            lineCast.casting = true;
+            
         
     }
 
 
+    private void CastRelease(InputAction.CallbackContext context) //right click currently
+    {
+        Debug.Log("cast release");
+            lineCast.lineVisual.enabled = false;
+            lineCast.casting = false;
+            if(!lineOut) 
+            {
+                Debug.Log("start fishing");
+                ActionListener();
+            }
+        
+        
+    }
 
+    
 
     private void OnMousePos(InputValue value)
     {

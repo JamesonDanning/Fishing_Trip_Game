@@ -1,5 +1,5 @@
 {
-    "name": "Player Input Actions",
+    "name": "PlayerInputActions",
     "maps": [
         {
             "name": "Player",
@@ -11,7 +11,7 @@
                     "id": "0c989add-4974-423d-9b60-03ad5ebb418a",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "Hold(duration=0.1)"
+                    "interactions": ""
                 },
                 {
                     "name": "Look",
@@ -55,7 +55,7 @@
                 },
                 {
                     "name": "Cast",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "7c61d8f6-2cca-4ac7-88e7-bbea4b10d030",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -317,7 +317,7 @@
                     "name": "",
                     "id": "8f6c2a67-391d-40b6-a6b3-774971597be8",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Cast",

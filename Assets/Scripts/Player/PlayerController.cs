@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     void OnMove(InputValue value)
     {
         inputs.rawDirection = value.Get<Vector2>();
-        inputs.moveDirection = new Vector3(inputs.rawDirection.x, 0, inputs.rawDirection.y).normalized;        
+        inputs.moveDirection = new Vector3(inputs.rawDirection.x, 0, inputs.rawDirection.y).normalized;     
     }
 
     void DoMovement()

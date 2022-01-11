@@ -48,7 +48,7 @@ public class LineCast : MonoBehaviour
             cursor.SetActive(true);
             cursor.transform.position = hit.point + Vector3.up * 0.1f;
  
-            //Vector3 testPoint = new Vector3(20,0,20);
+            //Vector3 testPoint = new Vector3(20,10,20);
             Vector3 vo = CalculateVelocty(hit.point, castPoint.position, flightTime);
  
             Visualize(vo, cursor.transform.position); //we include the cursor position as the final nodes for the line visual position
